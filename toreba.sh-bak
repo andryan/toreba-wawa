@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cat toreba-prizes-daily.txt > toreba-prizes.txt
+curl --interface 115.166.97.1`shuf -i63-69 -n1` -s -H "Accept-Language: en-US,en;q=0.9,id;q=0.8" 'http://www.toreba.net/replay' | egrep '(title=""|Upload)' | sed 's#.*detail/\(.*\)" title="">Got \([^<]*\)</a>.*#\1,\2#'| sed 's#.*&nbsp;\(.*\)</span>#\1#' | sed 'N;s#\n#,#' >> toreba-prizes.txt
+sort toreba-prizes.txt | uniq > toreba-prizes-daily.txt
